@@ -35,11 +35,11 @@ while 1:
         principal_paid = middle - interest_
         balance = balance - principal_paid
         
-    if balance < 0:
+    if balance < epsilon:
         high = middle
-    elif balance > 0:
+    elif balance > epsilon:
         low = middle
-    elif balance < epsilon:
+    else:
         break
         
     print balance, round(middle, 2)
