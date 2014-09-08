@@ -1,0 +1,24 @@
+#!/bin/python
+
+balance = float(raw_input("Enter outstanding credit card balance: "))
+interest = float(raw_input("Enter cred card interest rate (ex: 0.18): "))
+
+
+low = balance / 12.0
+high = (balance * (1 + (interest / 12.0))**12.0) / 12.0
+ans = round((low + high) / 2.0, 2)
+
+while 1:
+	if ((ans * 12.0) - balance) >= 0.01:
+		high = ans
+	elif ((ans * 12.0) - balance) <= 0.01:
+		low = ans
+	else:
+		break
+	ans = round((low + high) / 2.0, 2)
+	print "low", low
+	print "high", high
+	print "ans", ans
+	if round(low, 2) == round(high, 2) == round(ans, 2):
+		break
+print (balance - (ans * 12.0))
