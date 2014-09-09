@@ -1,6 +1,17 @@
-#!/bin/python
+##
+##  Count the Vowels
+##  Problem Set 1 Question 1
+##
 
-birth_date = str(raw_input("What is your brithday: "))
-last_name = str(raw_input("What is your name: "))
+## Counts the number of vowels (excluding y) in a given
+## String. Returns Int.
+def countVowels(s, debug = False):
+    count = 0
+    for i in s:
+        if i in 'aeiou':
+            count += 1
 
-print(last_name+" "+birth_date)
+    if debug == True:
+        print 'Number of vowels:', count
+    
+    return count
