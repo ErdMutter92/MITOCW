@@ -1,26 +1,18 @@
-#!/bin/python
-
-## Paying Debt Off In a Year given a outstanding balance and interest rate.
-
-outstanding_balance_save = float(raw_input("Enter the outstanding balance on your credit card: "))
-interest_rate = float(raw_input("Enter the annual credit card interest rate as a decimal: "))
-
-print "RESULT"
+outstanding_balance_ = float(raw_input('Balance: '))
+interest_rate = float(raw_input('Rate: '))
 
 count = 0
 while 1:
-    count = count + 1
     payment = 10 * count
-    outstanding_balance = outstanding_balance_save
-    for i in range(1, 13):
-        monthly_interest_rate = interest_rate / 12.0
-        outstanding_balance = outstanding_balance * (1 + monthly_interest_rate) - payment
-        if outstanding_balance < 0:
-            months = i
+    outstanding_balance = outstanding_balance_
+    for month in range(1, 13):
+        monthly_interest_rate = (interest_rate / 12.0)
+        monthly_unpaid_balance = outstanding_balance - payment
+        outstanding_balance = monthly_unpaid_balance + (monthly_interest_rate * monthly_unpaid_balance)
+        if outstanding_balance <= 0:
             break
-    if outstanding_balance < 0:
+    if outstanding_balance <= 0:
         break
+    count += 1
 
-print "Monthly payment to pay of debt in 1 year: ", payment
-print "Number of months needed: ", months
-print "Balance: ", round(outstanding_balance, 2)
+print 'Lowest Payment:', payment

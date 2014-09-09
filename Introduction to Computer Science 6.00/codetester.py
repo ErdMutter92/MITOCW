@@ -1,20 +1,39 @@
-high = 100
-low = 0
+balance = 9999999999999
+annualInterestRate = 0.2
+balance_ = balance
 
-print 'Please think of a number between '+str(low)+' and '+str(high)+'!'
+monthly_interest_rate = annualInterestRate / 12.0
+low = balance / 12
+high = (balance * (1 + monthly_interest_rate) ** 12) / 12.0
+epsilon = 0.01
+trys = 0
 
-while 1:
-    middle = (high + low) / 2
-    print 'Is your secret number '+str(middle)+'?'
-    user_input = str(raw_input("Enter 'h' to indicate the guess is too high. Enter 'l' to indicate the guess is too low. Enter 'c' to indicate I guessed correctly. "))
+while round(balance_, 2) != 0:
+    balance_ = balance
+    mid = (low + high) / 2.0
+
+    #print low,mid,high
+
+    for month in range(1, 13):
+        trys += 1
+        monthly_interest_rate = (annualInterestRate / 12.0)
+        monthly_unpaid_balance = balance_ - mid
+        balance_ = monthly_unpaid_balance + (monthly_interest_rate * monthly_unpaid_balance)
+        if balance_ <= 0:
+            break
     
-    if user_input == 'h':
-        high = middle
-    elif user_input == 'l':
-        low = middle
-    elif user_input == 'c':
-        print 'Game over. Your secret number was:', middle
-        break
+    balance_ = round(balance_, 2)
+    
+    if balance_ < epsilon and balance_ != 0:
+        high = mid
+    elif balance_ >= epsilon and balance_ != 0:
+        low = mid
     else:
-        print 'Sorry, I did not understand your input.'
+        break
     
+    #if str(high) == str(low) == str(mid):
+    #    break
+        
+    
+print 'Lowest Payment:', round(mid, 2)
+print trys, balance_
