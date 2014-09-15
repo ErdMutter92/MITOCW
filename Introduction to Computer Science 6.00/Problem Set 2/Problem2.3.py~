@@ -1,5 +1,5 @@
 balance = 1000
-annualInterestRate = 0.05
+annualInterestRate = 0.02
 balance_ = balance
 
 monthly_interest_rate = annualInterestRate / 12.0
